@@ -2,6 +2,31 @@
 require "./conn.php";
 session_start();
 $name =  $_SESSION["firstName"];
+
+if(isset($_POST['button'])){
+    $cancelled = $_POST["cancelled"];
+    $replacement = $_POST["replacement"];
+    $client = $_POST["client"];
+    $amount = $_POST["amount"];
+    $vat = $_POST["vat"];
+    $reason = $_POST["reason"];
+    if(isset($_FILES['file'])){
+        if($_FILES['file']['type'] == "application/pdf"){
+            $img= $_FILES['file']['name'];
+            move_uploaded_file($_FILES['file']['tmp_name'],'./img/'.$img);
+            // echo "Image Moved";
+        }else {
+            echo "This system only supports pdf files";
+            return false;
+        }
+        if(!empty($name)){
+            
+            pdf::insert($cancelled, $replacement, $client, $amount, $vat, $img, $reason, $name);
+        } else {
+            pdf::$alerts[]= 'Please fill the fields';
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,20 +38,20 @@ $name =  $_SESSION["firstName"];
     <link rel="stylesheet" href="./css/save.scss">
 </head>
 <body>
-    <section class="et-hero-tabs" >
+    <section class="et-hero-tabs" id="home">
         <h1>Welcome <?php echo $name; ?></h1>
         <h3>Store all cancelled invoices securely and easily</h3>
         <div class="et-hero-tabs-container">
         <a class="et-hero-tab" href="#home" style="text-decoration: none;">HOME</a>
         <a class="et-hero-tab" href="#cancel" style="text-decoration: none;">CANCEL INVOICE</a>
-        <a class="et-hero-tab" href="#" style="text-decoration: none;">VIEW INVOICES</a>
+        <a class="et-hero-tab" href="view_invoices.php" style="text-decoration: none;">VIEW INVOICES</a>
         <a class="et-hero-tab" href="#" style="text-decoration: none;">lOGOUT</a>
         <span class="et-hero-tab-slider" style="text-decoration: none;"></span>
         </div>
     </section>
    
 
-   <div class="h-100 p-4" id="cancel">
+   <div class="h-100 p-4 et-slide" id="cancel">
         <div class="alerts">
             <h1 class="alert-heading">
                 <?php 
@@ -48,7 +73,7 @@ $name =  $_SESSION["firstName"];
                 </div>
                 <div class="col-md-8">
                     <div class="p-3 py-5">
-                        <form action="uploadPDF.php" method="POST" enctype="multipart/form-data">
+                        <form action="" method="POST" enctype="multipart/form-data">
                             <div class="row mt-2">
                                 <div class="col-md-6"><label>Invoice No of Cancelled Invoice</label><input type="number" class="form-control" placeholder="Cancelled" value="" name="cancelled"></div>
                                 <div class="col-md-6"><label>Invoice No of Replacement Invoice</label><input type="number" class="form-control" value="" placeholder="Replacement" name="replacement"></div>
@@ -80,21 +105,21 @@ $name =  $_SESSION["firstName"];
 
         <div class="container">
             <?php 
-                if(count(pdf::select())>0){
-                    $fetch= pdf::select();
-                    foreach ($fetch as $value) {
+                // if(count(pdf::select())>0){
+                //     $fetch= pdf::select();
+                //     foreach ($fetch as $value) {
             ?>   
-            <a href="images/<?php echo $value["img"]; ?>" download="<?php echo $value["img"]; ?>"><?php echo $value["name"]; ?></a>        
-            <?php }
-                }
+            <!-- <a href="images/<?php //echo $value["img"]; ?>" download="<?php // echo $value["img"]; ?>"><?php // echo $value["name"]; ?></a>         -->
+            <?php //}
+                //}
             ?>
         </div>
 
 
-        <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
         <script src="./js/save.js"></script>
+        
 </body>
 </html>

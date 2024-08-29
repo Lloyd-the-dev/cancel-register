@@ -9,9 +9,9 @@
             $add = pdf::connect()->prepare("INSERT INTO invoices(invoiceNoCancelled, invoiceNoReplacement, client, totalAmount, VAT, invoiceImg, Reason, user) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
             $add->execute(array($cancelled, $replace, $client, $amount, $vat, $img, $reason, $user));
             if($add){
-                pdf::$alerts[] = "added!";
+                pdf::$alerts[] = "Cancelled Invoice Added!";
             } else {
-                pdf::$alerts[] = "Not added!";
+                pdf::$alerts[] = "Cancelled Invoice Not added!";
             }
         }
         public static function select(){
