@@ -1,12 +1,17 @@
 body {
     font-family: "Century Gothic", 'Lato', sans-serif;
     // background: #eee;
+    scroll-behavior: smooth;
 }
 
 a {
 text-decoration: none;
 }
-
+.alert-heading{
+    color: red;
+    text-align: center;
+    margin-top: 3rem;
+}
 .et-hero-tabs,
 .et-slide {
 display: flex;
