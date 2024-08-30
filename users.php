@@ -16,7 +16,7 @@
 <body>
     <section class="et-hero-tabs" >
         <h1>View Users</h1>
-        <h3>You can View an onboard users easily below</h3>
+        <h3>You can View and onboard users easily below</h3>
         <div class="et-hero-tabs-container">
         <a class="et-hero-tab" href="save.php" style="text-decoration: none;">HOME</a>
         <a class="et-hero-tab" href="view_invoices.php" style="text-decoration: none;">VIEW INVOICES</a>

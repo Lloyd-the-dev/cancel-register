@@ -3,6 +3,7 @@ require "./conn.php";
 session_start();
 $name =  $_SESSION["firstName"];
 $isAdmin = $_SESSION["admin"];
+$userId = $_SESSION["user_id"];
 
 if(isset($_POST['button'])){
     $cancelled = $_POST["cancelled"];
@@ -49,6 +50,7 @@ if(isset($_POST['button'])){
         <?php if($isAdmin){ ?>
             <a class="et-hero-tab" href="users.php" style="text-decoration: none;">USERS</a>
         <?php } ?>
+        <a class="et-hero-tab" href="editProfile.php?id='<?php echo $userId; ?>'" style="text-decoration: none;">Edit profile</a>
         <a class="et-hero-tab" href="logout.php" style="text-decoration: none;">lOGOUT</a>
         <span class="et-hero-tab-slider" style="text-decoration: none;"></span>
         </div>
