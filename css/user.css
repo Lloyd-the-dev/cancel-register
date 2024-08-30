@@ -1,0 +1,41 @@
+#users{
+    background-color: #dfdfdf;
+    height: 100vh;
+}
+.container{
+    margin: 2rem auto;
+    padding: 2rem;
+    display: flex;
+    width: 70%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+@media (max-width: 1200px) {
+    .card {
+        width: calc(33.333% - 1rem); /* Adjusts to 3 cards per row on smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: calc(50% - 1rem); /* Adjusts to 2 cards per row on tablets */
+    }
+}
+
+@media (max-width: 576px) {
+    .card {
+        width: 100%; /* Adjusts to 1 card per row on small screens */
+    }
+}
+.cancel-heading{
+    text-align: center;
+    margin: 3rem;
+    text-decoration: underline wavy #0d6efd;
+}
+.add-users{
+    width: 40%;
+    margin: 3rem auto;
+}
+.add-users h3{
+    text-align: center;
+}

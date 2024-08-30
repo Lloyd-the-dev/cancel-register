@@ -14,6 +14,7 @@
             session_start();
             $_SESSION["user_id"] = $row["user_id"];
             $_SESSION["firstName"] = $row["First Name"];
+            $_SESSION["admin"] = $row["is_admin"];
             header("Location: save.php");
         } else {
             echo '<script type="text/JavaScript">';

@@ -2,6 +2,7 @@
 require "./conn.php";
 session_start();
 $name =  $_SESSION["firstName"];
+$isAdmin = $_SESSION["admin"];
 
 if(isset($_POST['button'])){
     $cancelled = $_POST["cancelled"];
@@ -45,7 +46,10 @@ if(isset($_POST['button'])){
         <a class="et-hero-tab" href="#home" style="text-decoration: none;">HOME</a>
         <a class="et-hero-tab" href="#cancel" style="text-decoration: none;">CANCEL INVOICE</a>
         <a class="et-hero-tab" href="view_invoices.php" style="text-decoration: none;">VIEW INVOICES</a>
-        <a class="et-hero-tab" href="#" style="text-decoration: none;">lOGOUT</a>
+        <?php if($isAdmin){ ?>
+            <a class="et-hero-tab" href="users.php" style="text-decoration: none;">USERS</a>
+        <?php } ?>
+        <a class="et-hero-tab" href="logout.php" style="text-decoration: none;">lOGOUT</a>
         <span class="et-hero-tab-slider" style="text-decoration: none;"></span>
         </div>
     </section>

@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root"; 
 $password = "oreoluwa2003"; 
-$dbname = "pdf"; 
+$dbname = "cancelledInvoices"; 
 
 // Create a database connection
 $conn = new mysqli($servername, $username, $password, $dbname);
